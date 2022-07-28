@@ -1,10 +1,11 @@
 import Head from "next/head";
 import Image from "next/image";
+import useUser from "../hooks/useUser";
 import styles from "../styles/Home.module.css";
-import axios from "axios";
 
 const image = require("../public/images/signup.png");
 const Home = (props) => {
+  const user = useUser();
   return (
     <div className={styles.container}>
       <Head>
@@ -19,7 +20,13 @@ const Home = (props) => {
           height="800"
           placeholder="blur"
         />
-        {props.currentUser}
+        {props.currentUser ? (
+          <h1 className="block text-gray-700 text-xl font-bold m-2">
+            Hi {user.email}
+          </h1>
+        ) : (
+          <h1> You are NOT signed in</h1>
+        )}
       </main>
     </div>
   );
@@ -27,22 +34,4 @@ const Home = (props) => {
 
 export default Home;
 
-export const getServerSideProps = async (context) => {
-  // Realizarlos de forma generica
-  const response = await axios
-    .get(
-      "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local/api/users/currentuser",
-      {
-        headers: {
-          Host: context.req.headers.host,
-          Cookies: context.req.headers.cookie,
-        },
-      }
-    )
-    .catch((err) => {
-      console.log(err.message);
-    });
-  console.log("---------------------------------------------");
-  console.log(context.req.headers);
-  return { props: response.data };
-};
+
