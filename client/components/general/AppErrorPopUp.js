@@ -11,7 +11,6 @@ export default function AppErrorPopUp(props) {
     <>
       {showAlert ? (
         <div
-          id="error-pop-up"
           className="flex p-5 mx-5 bg-red-200/70 backdrop-blur-sm rounded-lg dark:bg-red-200 absolute top-5  z-50"
           role="alert"
         >
