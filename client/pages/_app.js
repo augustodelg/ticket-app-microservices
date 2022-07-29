@@ -1,4 +1,4 @@
-import Layout from "../components/general/layout/layout";
+import Layout from "../components/layout/layout";
 import { UserProvider } from "../context/UserContext";
 import ApiClient from "../services/ApiClient";
 import "../styles/globals.css";
