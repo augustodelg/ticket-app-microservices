@@ -6,7 +6,7 @@ import { currentUserRouter } from './routes/currentUser';
 import { signinRouter } from './routes/signin';
 import { signoutRouter } from './routes/signout';
 import { signupRouter } from './routes/signup';
-import { errorHandler } from './middleware/errorHandler';
+import { errorHandler } from '@tacket/common';
 import cookieSession from 'cookie-session';
 
 const app = express();

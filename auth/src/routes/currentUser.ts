@@ -1,5 +1,5 @@
 import express, { Response, Request } from "express";
-import { currentUser } from "../middleware/currentUser";
+import { currentUser } from "@tacket/common";
 
 const router = express.Router();
 
