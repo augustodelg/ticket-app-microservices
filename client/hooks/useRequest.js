@@ -13,6 +13,7 @@ export default function useRequest({ url, method, body, onSuccess }) {
 
       return response.data;
     } catch (error) {
+      // Estaria bueno que esto actualice un contexto y que esto haga mostrar el mensaje de erro, asi solo se pone en el layout
       setErrors(<AppErrorPopUp errors={error.response.data.errors} />);
       throw error;
     }

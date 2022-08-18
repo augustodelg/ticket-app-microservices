@@ -5,7 +5,16 @@ const nextConfig = {
   webpackDevMiddleware: (config) => {
     config.watchOptions.poll = 300;
     return config;
-  }
+  },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/home',
+        permanent: true,
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig

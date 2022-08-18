@@ -6,7 +6,7 @@ const image = require("../public/images/404.png");
 
 export default function FourOhFour() {
   return (
-    <div className="flex md:w-3/5 mx-auto pt-2">
+    <div className="flex md:w-1/2 mx-auto py-10">
       <AppCard>
         <div className="md:grid md:grid-cols-2 justify-items-center items-center m-10 p-5 md:p-10 ">
           <section>
@@ -20,15 +20,18 @@ export default function FourOhFour() {
             />
           </section>
           <section>
-            <h1 className="text-left text-7xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-violet-500 ">
-              404 ​
+            <h1 className="text-left text-8xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-violet-500 ">
+              404 
             </h1>
             <h1 className="text-left text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-violet-500 ">
-              Page Not Found
+              Not
+            </h1>
+            <h1 className="text-left text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-violet-500 ">
+              Found
             </h1>
 
             <Link href="/">
-              <a>🏠​ Go back home</a>
+              <a className="text-left text-lg font-semibold ">🏠​ Go back home</a>
             </Link>
           </section>
         </div>
