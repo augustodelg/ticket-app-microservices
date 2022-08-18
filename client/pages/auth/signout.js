@@ -8,7 +8,7 @@ export default function Signout() {
         url: '/api/users/signout',
         method: 'post',
         body: {},
-        onSuccess: () => Router.push('/')
+        onSuccess: () => Router.push('/home')
     })
 
     useEffect(() => {

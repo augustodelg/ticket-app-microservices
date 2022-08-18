@@ -5,6 +5,7 @@ import ApiClient from "../../services/ApiClient";
 const Layout = ({ children }) => {
   return (
     <>
+     
       <Navbar />
       <main className="bg-indigo-200 pb-10" >{children}</main>
       <Footer />

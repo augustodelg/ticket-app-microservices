@@ -5,7 +5,6 @@ import Link from "next/link";
 
 export default function Navbar() {
   const user = useUser();
-  console.log(user);
   const links = [
     !user && { label: "Sign Up", href: "/auth/signup" },
     !user && { label: "Sign In", href: "/auth/signin" },
@@ -36,7 +35,7 @@ export default function Navbar() {
             placeholder="blur"
             layout="fixed"
           /> */}
-          <Link href={"/"}>
+          <Link href={"/home"}>
             <h3 className="text-xl font-extrabold italic my-auto pl-4 text-indigo-300">
               Tacket.
             </h3>
