@@ -6,7 +6,7 @@ import { currentUserRouter } from './routes/currentUser';
 import { signinRouter } from './routes/signin';
 import { signoutRouter } from './routes/signout';
 import { signupRouter } from './routes/signup';
-import { errorHandler } from './middleware/errorHandler';
+import { errorHandler, NotFoundError } from '@tacket/common';
 import cookieSession from 'cookie-session';
 
 const app = express();
@@ -17,10 +17,20 @@ app.use(cookieSession({
     secure: process.env.NODE_ENV !== 'test'
 
 }))
+
+
+//ROUTES 
 app.use(currentUserRouter);
 app.use(signinRouter);
 app.use(signoutRouter);
 app.use(signupRouter);
+
+
+
+app.all("*", async (req, res) => {
+    throw new NotFoundError();
+  });
+
 app.use(errorHandler);
 
 export { app }

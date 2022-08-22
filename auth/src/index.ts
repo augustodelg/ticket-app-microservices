@@ -6,8 +6,12 @@ const start = async () => {
     throw new Error("JWT_KEY must be defined 🤦");
 
   }
+  if (!process.env.MONGO_URI) {
+    throw new Error("MONGO_URI must be defined 🤦");
+
+  }
   try {
-    await mongoose.connect('mongodb://auth-mongo-srv:27017/auth');
+    await mongoose.connect(process.env.MONGO_URI);
     console.log('Connected to MongoDB');
   } catch (error) {
     console.error(error);
@@ -15,7 +19,7 @@ const start = async () => {
 }
 
 app.listen(3000, () => {
-  console.log('Listening on port 3000');
+  console.log('AUTH SERVICES: Listening on port 3000');
 });
 
 start();

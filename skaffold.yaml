@@ -16,3 +16,19 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
+    - image: augustodelg/ticket-client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "**/*.js"
+            dest: .
+    - image: augustodelg/ticket-tickets
+      context: tickets
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
