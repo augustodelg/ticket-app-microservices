@@ -2,14 +2,14 @@ import { OrderStatus } from "@tacket/common";
 import mongoose, { trusted } from "mongoose";
 import { TicketDoc } from "./tickets";
 
-interface OrderAttrs {
+export interface OrderAttrs {
     userId: string;
     status: OrderStatus;
     expiresAt: Date;
     ticket: TicketDoc;
 }
 
-interface OrderDoc extends mongoose.Document {
+export interface OrderDoc extends mongoose.Document {
     userId: string;
     status: OrderStatus;
     expiresAt: Date;
