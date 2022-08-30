@@ -6,6 +6,8 @@ import { Ticket } from '../models/tickets';
 import { Order } from '../models/orders';
 import OrderService from '../services/orderService';
 import { EXPIRATION_WINDOW_SECONDS } from '../config/general';
+import { OrderCreatedPublisher } from '../events/publishers/orderCreatedPublisher';
+import { natsWrapper } from '../natsWrapper';
 const router = express.Router();
 
 router.post('/api/orders', requireAuth, [
@@ -36,6 +38,17 @@ router.post('/api/orders', requireAuth, [
         ticket
     })
     // Publish an event saying that an order was created
+    new OrderCreatedPublisher(natsWrapper.client).publish({
+        id: order.id,
+        status: order.status,
+        userId: order.userId,
+        expiresAt: order.expiresAt.toISOString(),
+        ticket: {
+          id: ticket.id,
+          price: ticket.price,
+        },
+      });
+  
 
     res.status(201).send(order);
 });

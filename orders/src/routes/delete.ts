@@ -1,8 +1,10 @@
-import { OrderStatus, requireAuth } from '@tacket/common';
+import { requireAuth, OrderStatus } from '@tacket/common';
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
 import mongoose from 'mongoose';
+import { OrderCancelledPublisher } from '../events/publishers/orderCancelledPublisher';
 import { handleOwnOrder } from '../middlewares/handleOwnOrder';
+import { natsWrapper } from '../natsWrapper';
 
 const router = express.Router();
 
@@ -18,6 +20,15 @@ router.patch('/api/orders/:orderId', requireAuth,
     async (req: Request, res: Response) => {
         req.order!.status = OrderStatus.Cancelled;
         await req.order!.save();
+
+        new OrderCancelledPublisher(natsWrapper.client).publish({
+            id: req.order!.id,
+            ticket: {
+                id: req.order!.ticket.id
+            }
+        });
+
+
         res.status(204).send(req.order)
     });
 
