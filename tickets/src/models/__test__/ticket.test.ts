@@ -30,3 +30,18 @@ it('Implements concurrency control', async () => {
     }).rejects.toThrow();
 
 })
+
+it('Increments the version number on multiple saves', async () => {
+    const ticket = Ticket.build({
+        title: 'Concurrency test',
+        price: 20,
+        userId: '123'
+    });
+
+    await ticket.save();
+    expect(ticket.version).toEqual(0);
+    await ticket.save();
+    expect(ticket.version).toEqual(1);
+    await ticket.save();
+    expect(ticket.version).toEqual(2);
+});
