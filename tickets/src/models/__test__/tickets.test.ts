@@ -1,4 +1,4 @@
-import { Ticket } from "../ticket";
+import { Ticket } from "../tickets";
 
 it('Implements concurrency control', async () => {
 
