@@ -11,7 +11,7 @@ export class TicketCreatedListener extends Listener<TicketCreatedEvent>{
     async onMessage(data: TicketCreatedEvent['data'], msg: Message): Promise<void> {
         const { id, title, price } = data;
 
-        TicketService.create({
+        await TicketService.create({
             id,
             title,
             price

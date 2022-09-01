@@ -4,10 +4,12 @@ import { Ticket } from '../../models/tickets';
 import { Order } from '../../models/orders';
 import { OrderStatus } from '@tacket/common';
 import { natsWrapper } from '../../natsWrapper';
+import mongoose from 'mongoose';
 
 
 const buildTicket = async () => {
   const ticket = Ticket.build({
+      id: new mongoose.Types.ObjectId().toHexString(),
       title: 'concert',
       price: 20,
   });
@@ -55,7 +57,7 @@ it('Emits a order cancelled event', async () => {
 
   // make a request to cancel the order
   await request(app)
-    .delete(`/api/orders/${order.id}`)
+    .patch(`/api/orders/${order.id}`)
     .set('Cookie', user)
     .send()
     .expect(204);
