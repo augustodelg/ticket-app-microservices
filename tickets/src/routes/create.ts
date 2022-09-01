@@ -1,9 +1,10 @@
 import express, { Request, Response } from "express";
 import { requireAuth, validateRequest } from "@tacket/common";
 import { body } from "express-validator";
-import { Ticket } from "../models/ticket";
+import { Ticket } from "../models/tickets";
 import { TicketCreatedPublisher } from "../events/publishers/ticketCreatedPublisher";
 import { natsWrapper } from "../natsWrapper";
+import TicketService from "../services/ticketService";
 
 const router = express.Router();
 
@@ -24,12 +25,12 @@ router.post('/api/tickets',
     async (req: Request, res: Response) => {
         const { title, price } = req.body;
 
-        const ticket = Ticket.build({
+        const ticket = await TicketService.create({
             title,
             price,
             userId: req.currentUser!.id,
-        });
-        await ticket.save();
+        })
+        
         await new TicketCreatedPublisher(natsWrapper.client).publish({
             id: ticket.id,
             title: ticket.title,

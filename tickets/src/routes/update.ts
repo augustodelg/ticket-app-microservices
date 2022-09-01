@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { requireAuth, validateRequest, NotFoundError, NotAuthorizedError } from "@tacket/common";
 import { body } from "express-validator";
-import { Ticket } from "../models/ticket";
+import { Ticket } from "../models/tickets";
 import { TicketUpdatedPublisher } from "../events/publishers/ticketUpdatedPublisher";
 import { natsWrapper } from "../natsWrapper";
 
