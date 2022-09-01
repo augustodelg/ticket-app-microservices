@@ -23,6 +23,7 @@ router.patch('/api/orders/:orderId', requireAuth,
 
         new OrderCancelledPublisher(natsWrapper.client).publish({
             id: req.order!.id,
+            version: req.order!.version,
             ticket: {
                 id: req.order!.ticket.id
             }
