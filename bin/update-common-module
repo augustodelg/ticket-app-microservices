@@ -57,7 +57,6 @@ update_common_module_for_a_specific_service() {
    cd $1
    # Change the command to the one required
    npm run update-common
-   exit 0
 }
 
 select_service_to_update() {
