@@ -15,15 +15,16 @@ print_service_message() {
 Help()
 {
    # Display Help
-   echo "Add description of the script functions here."
-   echo
-   echo "Syntax: scriptTemplate [-g|h|v|V]"
+   print_message "This is a script to facilitate the management of the common library in each service. "
+   printf "\e[1;37mSyntax: update-common-module (with no options) --> Will start an interactive mode\e[0m\n"
+   echo 
+   echo "Syntax: update-common-module [-a|s|l]"
    echo "options:"
-   echo "g     Print the GPL license notification."
-   echo "h     Print this Help."
-   echo "v     Verbose mode."
-   echo "V     Print software version and exit."
-   echo
+   echo "a     Update common module for all services."
+   echo "s     Update common module for specific services"
+   echo "l     List all services available."
+   echo 
+   echo "CREDITS: @augustodelg"
 }
 
 select_mode_update() {
@@ -54,6 +55,7 @@ update_common_module_for_all_services() {
 update_common_module_for_a_specific_service() {
    print_message "Updating common module for $( print_service_message $1)"
    cd $1
+   # Change the command to the one required
    npm run update-common
    exit 0
 }
@@ -78,7 +80,7 @@ list_all_services(){
 }
 
 # Get the options
-while getopts :h:a:s::l option; do
+while getopts ":a :s: :l :h" option; do
    case $option in
       h) # display Help
          Help
@@ -86,7 +88,7 @@ while getopts :h:a:s::l option; do
       a) # update common module for all services
          update_common_module_for_all_services
          exit;;
-      s) # update common module for all services
+      s) # update common module for specific services
          if [ $OPTARG ] && [ -d $BASE_PATH/services/$OPTARG ]
          then
             update_common_module_for_a_specific_service $BASE_PATH/services/$OPTARG
@@ -109,7 +111,6 @@ while getopts :h:a:s::l option; do
    esac
 done
 
-#services= echo $BASE_PATH/services/*| tr " " "\n" | awk -F "/" '{print $NF}' | tr "\n" " "
 select_mode_update
 
 exit 0
