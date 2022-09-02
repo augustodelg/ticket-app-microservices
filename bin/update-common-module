@@ -1,0 +1,115 @@
+#!/usr/bin/env bash
+
+set -e 
+
+SERVICES=$BASE_PATH/services/*
+
+print_message() {
+    printf "\n\e[1;32m------------------------------------------\n$1\e[1;32m\n------------------------------------------\e[0m\n\n"
+}
+
+print_service_message() {
+    printf "\e[1;37m 🖥  [$( echo $1 | awk -F "/" '{print $NF}' )] - $1\n\n"
+}
+
+Help()
+{
+   # Display Help
+   echo "Add description of the script functions here."
+   echo
+   echo "Syntax: scriptTemplate [-g|h|v|V]"
+   echo "options:"
+   echo "g     Print the GPL license notification."
+   echo "h     Print this Help."
+   echo "v     Verbose mode."
+   echo "V     Print software version and exit."
+   echo
+}
+
+select_mode_update() {
+    print_message "Select mode update:"
+    echo "1. Update all services"
+    echo "2. Update specific service"
+    echo "3. Exit"
+    read -p "Enter your choice: " choice
+    case $choice in
+        1) update_common_module_for_all_services ;;
+        2) select_service_to_update ;;
+        3) exit 0 ;;
+        *) echo "Invalid choice" && exit 1 ;;
+    esac
+}
+
+# Make a fuction to update the npm common module for all the services
+update_common_module_for_all_services() {
+  print_message "Updating common module for all services..."
+  for dir in $BASE_PATH/services/*; do
+    if [ -d "$dir" ]; then
+      cd $dir
+      update_common_module_for_a_specific_service $dir
+    fi
+  done
+}
+
+update_common_module_for_a_specific_service() {
+   print_message "Updating common module for $( print_service_message $1)"
+   cd $1
+   npm run update-common
+   exit 0
+}
+
+select_service_to_update() {
+   print_message "Please select a service to update common module:"
+
+   select service in $SERVICES
+   do
+   printf "Selected character: $service"
+   update_common_module_for_a_specific_service $service
+   done
+}
+
+list_all_services(){
+   print_message "List of services:"
+   for dir in $BASE_PATH/services/*; do
+      if [ -d "$dir" ]; then
+         print_service_message $dir
+      fi
+   done
+}
+
+# Get the options
+while getopts :h:a:s::l option; do
+   case $option in
+      h) # display Help
+         Help
+         exit;;
+      a) # update common module for all services
+         update_common_module_for_all_services
+         exit;;
+      s) # update common module for all services
+         if [ $OPTARG ] && [ -d $BASE_PATH/services/$OPTARG ]
+         then
+            update_common_module_for_a_specific_service $BASE_PATH/services/$OPTARG
+            exit;
+         else
+            printf "Service ' $OPTARG ' does not exist"
+            exit;
+         fi
+         ;;
+      l)
+         list_all_services
+         exit;;
+      \?) # Invalid option
+         printf "Error: Invalid option"
+         exit;;
+      :)
+      printf "Option -$OPTARG requires an argument." >&2
+      exit 1
+      ;;
+   esac
+done
+
+#services= echo $BASE_PATH/services/*| tr " " "\n" | awk -F "/" '{print $NF}' | tr "\n" " "
+select_mode_update
+
+exit 0
