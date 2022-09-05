@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { requireAuth, validateRequest, NotFoundError, NotAuthorizedError } from "@tacket/common";
+import { requireAuth, validateRequest, NotFoundError, NotAuthorizedError, BadRequestError } from "@tacket/common";
 import { body } from "express-validator";
 import { Ticket } from "../models/tickets";
 import { TicketUpdatedPublisher } from "../events/publishers/ticketUpdatedPublisher";
@@ -28,6 +28,11 @@ router.put('/api/tickets/:id',
         if (!ticket) {
             throw new NotFoundError();
         }
+
+        if (ticket.orderId) {
+            throw new BadRequestError('Cannot edit a reserved ticket');
+        }
+
         if (ticket.userId !== req.currentUser!.id) {
             throw new NotAuthorizedError();
         }
