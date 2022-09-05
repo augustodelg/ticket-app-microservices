@@ -1,6 +1,7 @@
 import { Listener, OrderCreatedEvent, OrderStatus, Subjects } from "@tacket/common";
 import { Message } from "node-nats-streaming";
 import TicketService from "../../services/ticketService";
+import { TicketUpdatedPublisher } from "../publishers/ticketUpdatedPublisher";
 import { queueGroupName } from "./queueGroupName";
 
 export class OrderCreatedListener extends Listener<OrderCreatedEvent>{
@@ -16,6 +17,14 @@ export class OrderCreatedListener extends Listener<OrderCreatedEvent>{
         await TicketService.update(ticket, {
             orderId: data.id
         });
+        new TicketUpdatedPublisher(this.client).publish({
+            id: ticket.id,
+            version: ticket.version,
+            title: ticket.title,
+            price: ticket.price,
+            userId: ticket.userId,
+            orderId: ticket.orderId
+        })
         
         msg.ack();
     }
