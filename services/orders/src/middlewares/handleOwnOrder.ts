@@ -11,6 +11,7 @@ declare global {
     }
 }
 
+// Move this at routes. router.param
 export async function handleOwnOrder(req: Request, res: Response, next: NextFunction) {
     const order = await orderService.findById(req.params.orderId);
 

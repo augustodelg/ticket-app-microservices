@@ -2,7 +2,7 @@
 import {Listener, Subjects, TicketCreatedEvent} from '@tacket/common';
 import { Message } from 'node-nats-streaming';
 import TicketService from '../../services/ticketService';
-import { queueGroupName } from './queueGroupNames';
+import { queueGroupName } from './queueGroupName';
 
 export class TicketCreatedListener extends Listener<TicketCreatedEvent>{
     readonly subject = Subjects.TicketCreated;

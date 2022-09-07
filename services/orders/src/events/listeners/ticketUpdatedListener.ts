@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import { Message } from 'node-nats-streaming';
 import { Ticket } from '../../models/tickets';
 import TicketService from '../../services/ticketService';
-import { queueGroupName } from './queueGroupNames';
+import { queueGroupName } from './queueGroupName';
 
 export class TicketUpdatedListener extends Listener<TicketUpdatedEvent>{
     readonly subject = Subjects.TicketUpdated;
