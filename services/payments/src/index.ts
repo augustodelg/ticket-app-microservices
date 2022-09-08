@@ -1,9 +1,6 @@
 import mongoose from 'mongoose';
 import { app } from './app';
 import { natsWrapper } from './natsWrapper';
-import { TicketCreatedListener } from './events/listeners/ticketCreatedListener';
-import { TicketUpdatedListener } from './events/listeners/ticketUpdatedListener';
-import { ExpirationCompleteListener } from './events/listeners/expirationCompleteListener';
 
 const start = async () => {
   if (!process.env.JWT_KEY) {
@@ -27,7 +24,7 @@ const start = async () => {
       process.env.NATS_CLUSTER_ID,
       process.env.NATS_CLIENT_ID,
       process.env.NATS_URL);
-
+    
     natsWrapper.client.on('close', () => {
       console.log('NATS connection closed.')
       process.exit();
@@ -35,9 +32,6 @@ const start = async () => {
     process.on('SIGINT', () => natsWrapper.client.close());
     process.on('SIGTERM', () => natsWrapper.client.close());
 
-    new TicketCreatedListener(natsWrapper.client).listen();
-    new TicketUpdatedListener(natsWrapper.client).listen();
-    new ExpirationCompleteListener(natsWrapper.client).listen();
     
     await mongoose.connect(process.env.MONGO_URI);
     console.log('Connected to MongoDB');
@@ -47,7 +41,7 @@ const start = async () => {
 }
 
 app.listen(3000, () => {
-  console.log('ORDERS SERVICES: Listening on port 3000');
+  console.log('PAYMENTS SERVICES: Listening on port 3000');
 });
 
 start();
