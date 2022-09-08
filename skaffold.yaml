@@ -48,3 +48,11 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
+    - image: augustodelg/ticket-payments
+      context: services/payments
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
