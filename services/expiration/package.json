@@ -19,7 +19,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@tacket/common": "^1.0.13",
+    "@tacket/common": "^1.0.14",
     "@types/bull": "^3.15.9",
     "bull": "^4.9.0",
     "ts-node-dev": "^2.0.0",
