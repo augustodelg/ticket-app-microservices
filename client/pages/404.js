@@ -6,7 +6,7 @@ const image = require("../public/images/404.png");
 
 export default function FourOhFour() {
   return (
-    <div className="flex md:w-1/2 mx-auto py-10">
+    <div className="md:w-1/2 mx-auto py-10">
       <AppCard>
         <div className="md:grid md:grid-cols-2 justify-items-center items-center m-10 p-5 md:p-10 ">
           <section>

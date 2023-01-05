@@ -13,3 +13,12 @@
 ![image](https://user-images.githubusercontent.com/28931847/188003314-2c1be504-b816-4dd9-ac30-9cc9a8940bdb.png)
 
 ![image](https://user-images.githubusercontent.com/28931847/188003366-f0f692d8-de03-42cd-811a-267dfd0ba946.png)
+
+
+### Extra
+
+NEEDED NGROK: ngrok http --host-header=rewrite tacket.dev:80
+
+EXEC: 
+kubectl create secret generic jwt-secret --from-literal JWT_KEY=jwtsecrettest
+kubectl create secret generic jwt-secret --from-literal JWT_KEY=asdf

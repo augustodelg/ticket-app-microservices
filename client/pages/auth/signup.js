@@ -35,10 +35,10 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex md:w-1/2 mx-auto py-10">
+    <div className="md:w-1/2 mx-auto py-10">
       <div class="absolute  bg-[url(/images/grid.svg)] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
       <AppCard>
-        <div className="md:grid md:grid-cols-2 justify-items-center items-center m-10 p-5 md:p-10 ">
+        <div className="sm:grid sm:grid-col-2  lg:grid-cols-2 justify-items-center items-center m-10 p-5 md:p-10 ">
           <section >
             <Image
               src={image}

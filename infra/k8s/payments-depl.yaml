@@ -36,6 +36,12 @@ spec:
                 secretKeyRef:
                   name: stripe-secret
                   key: STRIPE_KEY
+            - name: STRIPE_WEBHOOK_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: stripe-secret
+                  key: STRIPE_WEBHOOK_KEY
+
 ---
 apiVersion: v1
 kind: Service
