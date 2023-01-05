@@ -13,6 +13,14 @@ class PaymentService {
         return payment;
     }
 
+    public async findByOrderId(orderId: string): Promise<PaymentDoc | null> {
+        return await Payment.findOne({ orderId: orderId });
+    }
+
+    public async findByStripeId(stripeId: string): Promise<PaymentDoc | null> {
+        return await Payment.findOne({ stripeId: stripeId });
+    }
+
 }
 
 export default new PaymentService();

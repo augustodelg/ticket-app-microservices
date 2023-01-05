@@ -8,6 +8,8 @@ export default function Navbar() {
   const links = [
     !user && { label: "Sign Up", href: "/auth/signup" },
     !user && { label: "Sign In", href: "/auth/signin" },
+    user && { label: "Sell Tickets", href: "/tickets/new" },
+    user && { label: "My purchases", href: "/orders" },
     user && { label: "Sign Out", href: "/auth/signout" },
   ]
     .filter((linkConfig) => linkConfig)
@@ -27,14 +29,7 @@ export default function Navbar() {
     <div className="flex top-0 justify-center bg-gradient-to-b from-indigo-400/50 to-indigo-200 z-50 pt-4">
       <navbar className=" w-4/5 md:w-1/2 backdrop-blur-sm flex items-center justify-between flex-wrap p-2  bg-white rounded-full">
         <div className="container flex items-center justify-between">
-          {/* <div className="md:grid md:grid-cols-2  h-auto md:h-3/5 w-screen md:w-auto   ">
-          <Image
-            src={image}
-            width="75"
-            height="50"
-            placeholder="blur"
-            layout="fixed"
-          /> */}
+          
           <Link href={"/home"}>
             <h3 className="text-xl font-extrabold italic my-auto pl-4 text-indigo-300">
               Tacket.

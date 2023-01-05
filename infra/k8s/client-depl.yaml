@@ -15,6 +15,9 @@ spec:
       containers:
         - name: client
           image: augustodelg/ticket-client
+          env:
+            - name: NEXT_PUBLIC_STRIPE_KEY
+              value: 'pk_test_51Lhb9bBQMxIQmPgPRT90O6GQDIlXZ58TJOeE2zg7JkfYT4FzYaE1SeddW0dvbhtL3IbLWsAeFOeM0MxqEShcWgUZ00RYN3LIi8'
 ---
 apiVersion: v1
 kind: Service

@@ -4,7 +4,7 @@ export default function Footer() {
     <div class="md:flex md:justify-between ">
         <div class="mb-6 md:mb-0">
         <h3 className="text-xl font-extrabold italic my-auto pl-4">
-            Tackter.
+            Tacket.
           </h3>
         </div>
         <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">

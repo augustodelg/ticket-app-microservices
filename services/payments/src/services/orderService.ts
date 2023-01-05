@@ -6,6 +6,7 @@ class OrderService {
         return await Order.findById(orderId);
     }
 
+
     public async findByIdAndVersion(orderId: string, orderVersion: number): Promise<OrderDoc | null> {
         return await Order.findOne({
             _id: orderId,
