@@ -16,7 +16,7 @@ export class PaymentCreatedListener extends Listener<PaymentCreatedEvent>{
         }
 
         order.set({
-            status: OrderStatus.Complete
+            status: OrderStatus.AwaitingPayment
         });
 
         await order.save();

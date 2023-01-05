@@ -11,7 +11,7 @@ class OrderService {
 
     public async existing(ticket: TicketDoc): Promise<boolean> {
         const existingOrder = await Order.findOne({
-            ticket: ticket,
+            ticket: {_id: ticket._id},
             status: {
                 $in: [
                     OrderStatus.Created,
@@ -20,6 +20,8 @@ class OrderService {
                 ]
             }
         });
+        console.log('EXISTING ORDER', existingOrder);
+        
         return !!existingOrder;
     }
 

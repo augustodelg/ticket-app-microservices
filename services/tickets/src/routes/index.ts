@@ -5,7 +5,9 @@ import TicketService from '../services/ticketService';
 const router = express.Router();
 
 router.get('/api/tickets', async (req: Request, res: Response) => {
-  const tickets = await TicketService.find({});
+  const tickets = await TicketService.find({
+    orderId: undefined,
+  });
 
   res.send(tickets);
 });
